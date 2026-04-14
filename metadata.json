@@ -1,0 +1,6 @@
+{
+  "name": "DigiKing POS",
+  "description": "A multi-tenant SaaS POS system for merchants.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
