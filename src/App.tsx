@@ -12,6 +12,7 @@ import { OutletGuard } from './components/OutletGuard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AppLayout } from './components/AppLayout';
 
+const Login = lazy(() => import('./pages/Login'));
 const Onboarding = lazy(() => import('./pages/Onboarding'));
 const Inventory = lazy(() => import('./pages/Inventory'));
 const Reports = lazy(() => import('./pages/Reports'));
@@ -37,7 +38,7 @@ export default function App() {
         <ErrorBoundary>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
-              <Route path="/login" element={<div>Login Page</div>} />
+              <Route path="/login" element={<Login />} />
               <Route path="/callback" element={<div>Callback Handler</div>} />
               <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
               <Route path="/app/*" element={

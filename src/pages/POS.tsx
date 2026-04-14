@@ -30,7 +30,7 @@ export default function POS() {
       const { data: sale } = await supabase.from('sales').insert({ ...saleData, outlet_id: selectedOutletId }).select().single();
       for (const item of items) {
         await supabase.from('sale_items').insert({ ...item, sale_id: sale.id });
-        await (supabase as any).rpc('decrement_stock', { p_id: item.product_id, o_id: selectedOutletId, qty: item.qty });
+        await (supabase as any).rpc('decrement_stock', { p_id: item.product_id, o_id: selectedOutletId, qty: item.qty }, null);
       }
     } else {
       await db.offline_sales.add({
