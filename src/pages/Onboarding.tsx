@@ -49,7 +49,23 @@ export default function Onboarding() {
         <div className="space-y-4">
           <h2 className="text-xl font-bold">Invite Staff</h2>
           <button onClick={async () => {
-            await supabase.from('tenants').update({ onboarding_complete: true }).eq('org_id', orgCode);
+            // Create default outlet for new merchants
+            await supabase.from('outlet_settings').upsert({
+              org_id: orgCode,
+              outlet_name: business.name || 'Main Branch',
+              slug: 'main-branch',
+              address: business.address || '',
+              phone: business.phone || '',
+            });
+
+            // Then mark onboarding complete
+            await supabase.from('tenants').update({ 
+              onboarding_complete: true,
+              business_name: business.name,
+              currency: business.currency,
+              tax_rate: business.tax,
+            }).eq('org_id', orgCode);
+
             navigate('/app/pos');
           }} className="bg-blue-600 text-white p-2 rounded">Complete</button>
         </div>

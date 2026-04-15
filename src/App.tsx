@@ -20,6 +20,8 @@ const Staff = lazy(() => import('./pages/Staff'));
 const Settings = lazy(() => import('./pages/Settings'));
 const POS = lazy(() => import('./pages/POS'));
 const OutletSelector = lazy(() => import('./pages/OutletSelector'));
+const Callback = lazy(() => import('./pages/Callback'));
+
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { isAuthenticated } = useAuth();
@@ -39,7 +41,7 @@ export default function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/login" element={<Login />} />
-              <Route path="/callback" element={<div>Callback Handler</div>} />
+              <Route path="/callback" element={<Callback />} />
               <Route path="/onboarding" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
               <Route path="/app/*" element={
                 <ProtectedRoute>
